@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RYŌMEN // Oversized Acid Wash Heavyweight Tee</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#dc2626',
+              blood: '#991b1b',
+              dark: '#0a0a0c',
+              card: '#121216',
+              border: '#27272e',
+              muted: '#8b8b99'
+            }
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Space Grotesk"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Glow accents and backdrop effects */
+    .glow-crimson {
+      box-shadow: 0 0 25px -5px rgba(220, 38, 38, 0.45);
+    }
+    .text-glow {
+      text-shadow: 0 0 16px rgba(220, 38, 38, 0.7);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #27272e;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #dc2626;
+    }
+    /* Animated flame/pulse border */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .animate-subtle {
+      animation: pulse-subtle 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-[#08080a] text-zinc-100 font-sans min-h-screen selection:bg-red-600 selection:text-white flex flex-col justify-between custom-scrollbar">
+
+  <!-- Top ticker banner -->
+  <aside aria-label="Announcement" class="bg-red-600 text-black text-xs font-bold tracking-widest uppercase py-1.5 px-4 overflow-hidden relative border-b border-red-700 select-none">
+    <div class="flex justify-around items-center whitespace-nowrap animate-pulse">
+      <span class="flex items-center gap-2"><i class="ph-bold ph-lightning"></i> KING OF CURSES CAPSULE DROP // WORLDWIDE SHIPPING AVAILABLE</span>
+      <span class="hidden md:inline-flex items-center gap-2"><i class="ph-bold ph-flame"></i> 260 GSM HEAVYWEIGHT MINERAL ACID WASH</span>
+      <span class="hidden lg:inline-flex items-center gap-2"><i class="ph-bold ph-shield-check"></i> 100% COMBED COTTON</span>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-[#0a0a0d]/90 backdrop-blur-md border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <span class="w-10 h-10 rounded-lg bg-red-600/20 border border-red-500 flex items-center justify-center text-red-500 font-black text-xl group-hover:bg-red-600 group-hover:text-black transition-all duration-300">
+          宿
+        </span>
+        <div class="flex flex-col">
+          <span class="font-cinzel text-xl sm:text-2xl font-black tracking-wider text-white group-hover:text-red-500 transition-colors">SUKUNA</span>
+          <span class="text-[10px] tracking-[0.25em] text-zinc-400 uppercase -mt-1 font-semibold">Streetwear // 呪術</span>
+        </div>
+      </a>
+
+      <!-- Quick Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide text-zinc-300">
+        <a href="#media-gallery" class="hover:text-red-500 transition">LOOKBOOK</a>
+        <a href="#details" class="hover:text-red-500 transition">SPECIFICATIONS</a>
+        <a href="#reviews" class="hover:text-red-500 transition">REVIEWS</a>
+        <button onclick="openSizeGuide()" class="hover:text-red-500 transition flex items-center gap-1.5 text-zinc-400">
+          <i class="ph ph-ruler text-lg"></i> SIZE CHART
+        </button>
+      </nav>
+
+      <!-- Cart and Wishlist Controls -->
+      <div class="flex items-center gap-4">
+        <button id="likeBtn" onclick="toggleLike()" aria-label="Favorite this item" class="p-2.5 rounded-xl border border-zinc-800 hover:border-red-500/50 hover:bg-zinc-900 text-zinc-300 hover:text-red-500 transition">
+          <i id="likeIcon" class="ph ph-heart text-xl"></i>
+        </button>
+        <button id="cartBtn" onclick="toggleCartDrawer()" aria-label="View shopping cart" class="relative p-2.5 rounded-xl border border-zinc-800 hover:border-red-500/50 hover:bg-zinc-900 text-zinc-300 hover:text-white transition flex items-center gap-2">
+          <i class="ph ph-shopping-bag-open text-xl"></i>
+          <span id="cartCountBadge" class="bg-red-600 text-black text-xs font-black rounded-full h-5 w-5 flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex-1">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-6 tracking-wide">
+      <a href="#" class="hover:text-white transition">COLLECTIONS</a>
+      <span class="text-zinc-600">/</span>
+      <a href="#" class="hover:text-white transition">DARK SHIBUYA DROP</a>
+      <span class="text-zinc-600">/</span>
+      <span class="text-red-500">SUKUNA ACID-WASH OVERSIZED TEE</span>
+    </nav>
+
+    <!-- 2-Column Product Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+      
+      <!-- Media Showcase Column (Left, 7 Cols) -->
+      <section id="media-gallery" class="lg:col-span-7 flex flex-col gap-4">
+        
+        <!-- Primary Display Window (Video or Image) -->
+        <div class="relative w-full aspect-[4/5] sm:aspect-[1/1] md:aspect-[4/5] bg-zinc-950 rounded-2xl border border-zinc-800/80 overflow-hidden shadow-2xl group flex items-center justify-center">
+          
+          <!-- Looping Product Showcase Video (Active by default) -->
+          <div id="videoContainer" class="w-full h-full relative transition-opacity duration-300">
+            <video 
+              id="productVideo"
+              class="w-full h-full object-cover object-center"
+              autoplay 
+              loop 
+              muted 
+              playsinline
+              preload="auto"
+              poster="https://placehold.co/900x1100/121216/dc2626?text=Sukuna+Acid+Wash+Tee"
+            >
+              <source src="http://googleusercontent.com/generated_video_content/11158761575906810012" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Video Controls Overlay -->
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+              <span class="bg-black/75 backdrop-blur-md border border-zinc-800 px-3 py-1.5 rounded-full text-xs font-medium text-zinc-300 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                360° VIDEO FLEX LOOP
+              </span>
+              <div class="pointer-events-auto flex items-center gap-2">
+                <button onclick="toggleVideoSound()" id="soundToggleBtn" aria-label="Toggle Sound" class="p-2.5 rounded-full bg-black/75 backdrop-blur-md border border-zinc-700 text-zinc-200 hover:text-white hover:bg-zinc-800 transition">
+                  <i id="soundIcon" class="ph-bold ph-speaker-slash text-base"></i>
+                </button>
+                <button onclick="togglePlayPause()" id="playPauseBtn" aria-label="Pause/Play Video" class="p-2.5 rounded-full bg-black/75 backdrop-blur-md border border-zinc-700 text-zinc-200 hover:text-white hover:bg-zinc-800 transition">
+                  <i id="playPauseIcon" class="ph-bold ph-pause text-base"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Front Graphic Image View -->
+          <div id="frontImgContainer" class="hidden w-full h-full relative flex items-center justify-center bg-[#0d0d11] p-6">
+            <div class="w-full h-full flex flex-col items-center justify-center text-center">
+              <div class="relative max-w-md w-full p-6 border border-zinc-800/80 rounded-xl bg-zinc-900/40">
+                <div class="text-red-500 font-cinzel text-2xl font-bold tracking-widest mb-3">Ṣukùnà</div>
+                <div class="w-40 h-40 mx-auto my-4 border border-red-500/30 rounded-2xl flex items-center justify-center bg-zinc-950/80 shadow-inner relative overflow-hidden">
+                  <div class="text-zinc-300 text-xs text-center font-mono p-3 leading-relaxed">
+                    <span class="text-red-500 font-bold block mb-1">FRONT CHEST + TORSO</span>
+                    Demon Eye & Cursed Mouth Tongue Print
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-400">Minimalist typography on chest, demonic maw accent on right hip.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Back Graphic Graphic View -->
+          <div id="backImgContainer" class="hidden w-full h-full relative flex items-center justify-center bg-[#0d0d11] p-6">
+            <div class="w-full h-full flex flex-col items-center justify-center text-center">
+              <div class="relative max-w-md w-full p-6 border border-zinc-800/80 rounded-xl bg-zinc-900/40">
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-sm font-bold tracking-widest text-red-500">呪術廻戦</span>
+                  <span class="text-xs bg-red-950/80 text-red-400 border border-red-800/50 px-2 py-0.5 rounded">BACK PRINT</span>
+                </div>
+                <div class="w-48 h-56 mx-auto my-2 border border-red-500/30 rounded-2xl flex items-center justify-center bg-zinc-950/80 shadow-inner">
+                  <div class="text-zinc-300 text-xs text-center font-mono p-3 leading-relaxed">
+                    <span class="text-red-500 font-bold block mb-2">FULL BACK ARTWORK</span>
+                    Ryomen Sukuna Demon King Illustration with Kanji Calligraphy & Blood Markings
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-400 mt-2">Ultra-high resolution silkscreen ink with vintage crackle effect.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge tag -->
+          <span class="absolute top-4 left-4 bg-red-600 text-black text-xs font-black px-3 py-1 rounded-md tracking-wider uppercase shadow-lg">
+            LIMITED EDITION
+          </span>
+        </div>
+
+        <!-- Thumbnails Selector Row -->
+        <div class="grid grid-cols-3 gap-3">
+          <!-- Thumbnail 1: Video -->
+          <button 
+            onclick="switchMedia('video')" 
+            id="thumb-video"
+            class="media-tab-btn active relative rounded-xl border-2 border-red-500 bg-zinc-900 p-2 overflow-hidden flex flex-col items-center justify-center gap-1.5 aspect-[16/10] transition hover:border-red-400"
+          >
+            <i class="ph-fill ph-video-camera text-red-500 text-xl"></i>
+            <span class="text-xs font-bold text-white tracking-wide">360° Flex Video</span>
+            <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500"></span>
+          </button>
+
+          <!-- Thumbnail 2: Front Print -->
+          <button 
+            onclick="switchMedia('front')" 
+            id="thumb-front"
+            class="media-tab-btn relative rounded-xl border border-zinc-800 bg-zinc-900 p-2 overflow-hidden flex flex-col items-center justify-center gap-1.5 aspect-[16/10] transition hover:border-zinc-600"
+          >
+            <i class="ph-bold ph-t-shirt text-zinc-400 text-xl"></i>
+            <span class="text-xs font-semibold text-zinc-300 tracking-wide">Front View</span>
+          </button>
+
+          <!-- Thumbnail 3: Back Print -->
+          <button 
+            onclick="switchMedia('back')" 
+            id="thumb-back"
+            class="media-tab-btn relative rounded-xl border border-zinc-800 bg-zinc-900 p-2 overflow-hidden flex flex-col items-center justify-center gap-1.5 aspect-[16/10] transition hover:border-zinc-600"
+          >
+            <i class="ph-bold ph-sparkle text-zinc-400 text-xl"></i>
+            <span class="text-xs font-semibold text-zinc-300 tracking-wide">Back Artwork</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Product Configuration & Purchase Details (Right, 5 Cols) -->
+      <section class="lg:col-span-5 flex flex-col space-y-6">
+        
+        <!-- Header Info -->
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <div class="flex text-amber-400 text-sm">
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+            </div>
+            <span class="text-xs font-semibold text-zinc-400">(4.9/5 · 142 Reviews)</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl font-black font-cinzel tracking-tight text-white uppercase">
+            Sukuna "Cursed King" Tee
+          </h1>
+          <p class="text-sm text-zinc-400 mt-1 font-mono">Style Code: <span class="text-red-400">JJK-ACID-001</span> // Boxy Street Fit</p>
+
+          <!-- Price Row -->
+          <div class="flex items-baseline gap-3 mt-4">
+            <span id="productPrice" class="text-3xl font-extrabold text-red-500 font-sans tracking-tight">$44.00</span>
+            <span class="text-lg text-zinc-500 line-through">$58.00</span>
+            <span class="text-xs font-bold bg-red-950/80 text-red-400 border border-red-800/60 px-2.5 py-1 rounded-full uppercase tracking-wider">
+              SAVE 24%
+            </span>
+          </div>
+        </div>
+
+        <div class="border-t border-b border-zinc-800/80 py-5 space-y-5">
+          <!-- Size Selector Header -->
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+              Select Size: <span id="selectedSizeLabel" class="text-red-500 font-bold">L (Oversized)</span>
+            </label>
+            <button onclick="openSizeGuide()" class="text-xs font-semibold text-zinc-400 hover:text-red-400 underline underline-offset-4 flex items-center gap-1">
+              <i class="ph ph-ruler"></i> Sizing Guide
+            </button>
+          </div>
+
+          <!-- Size Buttons -->
+          <div class="grid grid-cols-5 gap-2.5">
+            <button onclick="selectSize('S')" class="size-btn py-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-sm font-bold text-zinc-300 hover:border-red-500 hover:text-white transition">
+              S
+            </button>
+            <button onclick="selectSize('M')" class="size-btn py-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-sm font-bold text-zinc-300 hover:border-red-500 hover:text-white transition">
+              M
+            </button>
+            <button onclick="selectSize('L')" class="size-btn active py-3 rounded-xl border-2 border-red-500 bg-red-500/10 text-sm font-bold text-white transition shadow-sm">
+              L
+            </button>
+            <button onclick="selectSize('XL')" class="size-btn py-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-sm font-bold text-zinc-300 hover:border-red-500 hover:text-white transition">
+              XL
+            </button>
+            <button onclick="selectSize('XXL')" class="size-btn py-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-sm font-bold text-zinc-300 hover:border-red-500 hover:text-white transition">
+              XXL
+            </button>
+          </div>
+
+          <!-- Color / Wash indicator -->
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-zinc-400">Colorway</span>
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded-full bg-zinc-500 border border-zinc-400"></span>
+              <span class="text-xs font-medium text-zinc-200">Mineral Acid Wash Gray</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <!-- Quantity Counter -->
+            <div class="flex items-center bg-zinc-900 border border-zinc-800 rounded-xl p-1">
+              <button onclick="updateQty(-1)" aria-label="Decrease quantity" class="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition font-bold text-lg">
+                <i class="ph ph-minus"></i>
+              </button>
+              <span id="qtyCounter" class="w-10 text-center font-bold text-white text-base">1</span>
+              <button onclick="updateQty(1)" aria-label="Increase quantity" class="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition font-bold text-lg">
+                <i class="ph ph-plus"></i>
+              </button>
+            </div>
+
+            <!-- Add to Cart CTA -->
+            <button 
+              id="addToCartBtn" 
+              onclick="addToCart()" 
+              class="flex-1 bg-red-600 hover:bg-red-500 text-black font-extrabold uppercase py-3.5 px-6 rounded-xl flex items-center justify-center gap-3 transition-all duration-200 transform active:scale-[0.98] glow-crimson"
+            >
+              <i class="ph-bold ph-shopping-bag text-xl"></i>
+              <span>Add to Cart</span>
+              <span class="text-xs font-black bg-black/20 px-2 py-0.5 rounded">- <span id="cartBtnTotal">$44.00</span></span>
+            </button>
+          </div>
+
+          <!-- Instant Buy Button -->
+          <button onclick="instantBuy()" class="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/60 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 transition">
+            <i class="ph-bold ph-lightning text-yellow-400"></i>
+            <span>Instant Checkout</span>
+          </button>
+        </div>
+
+        <!-- Shipping & Authenticity Badges -->
+        <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+          <div class="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3">
+            <i class="ph-bold ph-truck text-red-500 text-xl"></i>
+            <div>
+              <p class="font-bold text-white">Dispatches in 24h</p>
+              <p class="text-zinc-500">Free global over $75</p>
+            </div>
+          </div>
+          <div class="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center gap-3">
+            <i class="ph-bold ph-arrows-counter-clockwise text-red-500 text-xl"></i>
+            <div>
+              <p class="font-bold text-white">Hassle-Free Returns</p>
+              <p class="text-zinc-500">30-day exchange policy</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <section id="details" class="mt-16 pt-12 border-t border-zinc-800">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-red-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl mb-4">
+            <i class="ph-bold ph-t-shirt"></i>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg text-white mb-2">260 GSM Heavyweight Cotton</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Crafted from tight-knit 100% combed cotton. Built to drape naturally with an oversized boxy silhouette that holds its structure wear after wear.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-red-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl mb-4">
+            <i class="ph-bold ph-drop"></i>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg text-white mb-2">Artisan Mineral Acid Wash</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Each piece is individually treated with a stone/mineral acid wash, ensuring a one-of-a-kind vintage texture and subtle marbling across the fabric.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-red-500/40 transition">
+          <div class="w-12 h-12 rounded-xl bg-red-600/10 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl mb-4">
+            <i class="ph-bold ph-paint-brush"></i>
+          </div>
+          <h3 class="font-cinzel font-bold text-lg text-white mb-2">Crack-Proof Discharge Print</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Specialty discharge and plastisol inks penetrate the fabric fibers rather than sitting on top, preventing cracking, peeling, or fading when machine washed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="mt-16 pt-12 border-t border-zinc-800">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+        <div>
+          <h2 class="font-cinzel text-2xl font-black uppercase text-white">Verified Demon Kings</h2>
+          <p class="text-zinc-400 text-sm">Customer photos and verified feedback</p>
+        </div>
+        <div class="mt-4 sm:mt-0 flex items-center gap-2">
+          <span class="text-3xl font-extrabold text-white">4.9</span>
+          <div class="flex flex-col">
+            <div class="flex text-amber-400 text-xs">
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+              <i class="ph-fill ph-star"></i>
+            </div>
+            <span class="text-xs text-zinc-500">Based on 142 purchases</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Review 1 -->
+        <div class="p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/60">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-red-950 border border-red-700 flex items-center justify-center font-bold text-xs text-red-400">
+                MK
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-zinc-200">Makoto K.</h4>
+                <p class="text-xs text-zinc-500">Verified Buyer · Size L</p>
+              </div>
+            </div>
+            <div class="flex text-amber-400 text-xs">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+          </div>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            "The flex in person is insane. The acid wash is thick and high quality—not flimsy like mall brand shirts. Print on the back turns heads constantly."
+          </p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/60">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center font-bold text-xs text-zinc-300">
+                DR
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-zinc-200">Dante R.</h4>
+                <p class="text-xs text-zinc-500">Verified Buyer · Size XL</p>
+              </div>
+            </div>
+            <div class="flex text-amber-400 text-xs">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+          </div>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            "Video preview was accurate to how it fits in real life. Dropped shoulders, thick ribbed collar that doesn't bacon. 10/10 streetwear piece."
+          </p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="p-5 rounded-2xl bg-zinc-900/30 border border-zinc-800/60">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-red-950 border border-red-700 flex items-center justify-center font-bold text-xs text-red-400">
+                AY
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-zinc-200">Alex Y.</h4>
+                <p class="text-xs text-zinc-500">Verified Buyer · Size M</p>
+              </div>
+            </div>
+            <div class="flex text-amber-400 text-xs">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+          </div>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            "The Sukuna kanji script on the back with the blood seal tattoo graphics is crisp. Washed it three times already and zero shrinkage or fading."
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="sizeGuideModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-zinc-950 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+        <h3 class="font-cinzel text-xl font-black text-white flex items-center gap-2">
+          <i class="ph ph-ruler text-red-500"></i> Sizing Specification Chart
+        </h3>
+        <button onclick="closeSizeGuide()" class="text-zinc-400 hover:text-white p-1 rounded-lg">
+          <i class="ph ph-x text-2xl"></i>
+        </button>
+      </div>
+
+      <div class="mt-4">
+        <p class="text-xs text-zinc-400 mb-4">Fit: <strong>Boxy Streetwear Fit</strong>. Order regular size for signature relaxed oversized look, or size down for true-to-body fit.</p>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border border-zinc-800">
+            <thead class="bg-zinc-900 text-zinc-300 uppercase">
+              <tr>
+                <th class="p-3 border-b border-zinc-800">Size</th>
+                <th class="p-3 border-b border-zinc-800">Chest (Inches)</th>
+                <th class="p-3 border-b border-zinc-800">Length (Inches)</th>
+                <th class="p-3 border-b border-zinc-800">Shoulder (Inches)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-800 text-zinc-400">
+              <tr>
+                <td class="p-3 font-bold text-white">S</td>
+                <td class="p-3">42"</td>
+                <td class="p-3">28"</td>
+                <td class="p-3">21"</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-white">M</td>
+                <td class="p-3">45"</td>
+                <td class="p-3">29"</td>
+                <td class="p-3">22"</td>
+              </tr>
+              <tr class="bg-red-950/20 text-red-300">
+                <td class="p-3 font-bold text-red-400">L (Featured)</td>
+                <td class="p-3">48"</td>
+                <td class="p-3">30"</td>
+                <td class="p-3">23.5"</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-white">XL</td>
+                <td class="p-3">51"</td>
+                <td class="p-3">31"</td>
+                <td class="p-3">24.5"</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-white">XXL</td>
+                <td class="p-3">54"</td>
+                <td class="p-3">32"</td>
+                <td class="p-3">25.5"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeSizeGuide()" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition">
+          Got it
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <aside id="cartDrawer" aria-label="Shopping Cart Drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-zinc-950 border-l border-zinc-800 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-zinc-800 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="ph-bold ph-shopping-bag-open text-red-500 text-xl"></i>
+        <h3 class="font-cinzel text-lg font-bold text-white">Cart Details</h3>
+      </div>
+      <button onclick="toggleCartDrawer()" class="text-zinc-400 hover:text-white p-1">
+        <i class="ph ph-x text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div id="cartItemsList" class="flex-1 p-5 overflow-y-auto space-y-4 custom-scrollbar">
+      <!-- Items dynamically populated via JS -->
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-5 border-t border-zinc-800 bg-zinc-900/60 space-y-4">
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-zinc-400">Subtotal</span>
+        <span id="cartDrawerSubtotal" class="font-bold text-white text-base">$0.00</span>
+      </div>
+      <div class="flex items-center justify-between text-xs text-zinc-400">
+        <span>Standard Shipping</span>
+        <span class="text-emerald-400 font-bold">FREE</span>
+      </div>
+      <button onclick="triggerCheckout()" class="w-full bg-red-600 hover:bg-red-500 text-black font-extrabold uppercase py-3.5 px-4 rounded-xl transition glow-crimson flex items-center justify-center gap-2">
+        <span>Proceed to Checkout</span>
+        <i class="ph-bold ph-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Notification Toast -->
+  <div id="toastMessage" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-zinc-900 text-white border border-red-500/80 px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3">
+    <i class="ph-bold ph-check-circle text-red-500 text-xl"></i>
+    <span id="toastText" class="text-sm font-semibold">Added to Cart!</span>
+  </div>
+
+  <footer class="mt-20 border-t border-zinc-800/80 bg-zinc-950 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded bg-red-600 flex items-center justify-center text-black font-black text-sm">宿</span>
+        <span class="font-cinzel text-base font-bold text-white">SUKUNA STREETWEAR APPAREL</span>
+      </div>
+      <p class="text-zinc-500 text-xs text-center md:text-right">
+        Official Limited Capsule. Inspired by Cursed Energy & Shibuya Aesthetic.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // State management
+    const state = {
+      pricePerUnit: 44.00,
+      currentSize: 'L',
+      quantity: 1,
+      cart: [],
+      isLiked: false
+    };
+
+    // DOM references
+    const video = document.getElementById('productVideo');
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    const sizeLabel = document.getElementById('selectedSizeLabel');
+    const qtyCounter = document.getElementById('qtyCounter');
+    const cartBtnTotal = document.getElementById('cartBtnTotal');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    const toast = document.getElementById('toastMessage');
+    const toastText = document.getElementById('toastText');
+
+    function switchMedia(view) {
+      const videoBox = document.getElementById('videoContainer');
+      const frontBox = document.getElementById('frontImgContainer');
+      const backBox = document.getElementById('backImgContainer');
+
+      const tabs = {
+        video: document.getElementById('thumb-video'),
+        front: document.getElementById('thumb-front'),
+        back: document.getElementById('thumb-back')
+      };
+
+      // Reset tabs styling
+      Object.values(tabs).forEach(tab => {
+        tab.classList.remove('border-red-500', 'border-2');
+        tab.classList.add('border-zinc-800');
+      });
+
+      // Hide all displays
+      videoBox.classList.add('hidden');
+      frontBox.classList.add('hidden');
+      backBox.classList.add('hidden');
+
+      if (view === 'video') {
+        videoBox.classList.remove('hidden');
+        tabs.video.classList.add('border-red-500', 'border-2');
+        tabs.video.classList.remove('border-zinc-800');
+        video.play().catch(() => {});
+      } else if (view === 'front') {
+        frontBox.classList.remove('hidden');
+        tabs.front.classList.add('border-red-500', 'border-2');
+        tabs.front.classList.remove('border-zinc-800');
+      } else if (view === 'back') {
+        backBox.classList.remove('hidden');
+        tabs.back.classList.add('border-red-500', 'border-2');
+        tabs.back.classList.remove('border-zinc-800');
+      }
+    }
+
+    function toggleVideoSound() {
+      if (video.muted) {
+        video.muted = false;
+        soundIcon.className = 'ph-bold ph-speaker-high text-base';
+        showToast('Audio unmuted');
+      } else {
+        video.muted = true;
+        soundIcon.className = 'ph-bold ph-speaker-slash text-base';
+        showToast('Audio muted');
+      }
+    }
+
+    function togglePlayPause() {
+      if (video.paused) {
+        video.play();
+        playPauseIcon.className = 'ph-bold ph-pause text-base';
+      } else {
+        video.pause();
+        playPauseIcon.className = 'ph-bold ph-play text-base';
+      }
+    }
+
+    function selectSize(size) {
+      state.currentSize = size;
+      sizeLabel.textContent = `${size} (Oversized)`;
+
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-2', 'border-red-500', 'bg-red-500/10', 'text-white');
+        btn.classList.add('border-zinc-800', 'text-zinc-300');
+        if (btn.textContent.trim() === size) {
+          btn.classList.add('active', 'border-2', 'border-red-500', 'bg-red-500/10', 'text-white');
+          btn.classList.remove('border-zinc-800', 'text-zinc-300');
+        }
+      });
+    }
+
+    function updateQty(delta) {
+      const next = state.quantity + delta;
+      if (next >= 1 && next <= 10) {
+        state.quantity = next;
+        qtyCounter.textContent = state.quantity;
+        const total = (state.pricePerUnit * state.quantity).toFixed(2);
+        cartBtnTotal.textContent = `$${total}`;
+      }
+    }
+
+    function addToCart() {
+      const existingItem = state.cart.find(item => item.size === state.currentSize);
+      if (existingItem) {
+        existingItem.quantity += state.quantity;
+      } else {
+        state.cart.push({
+          id: 'sukuna-tee-' + state.currentSize,
+          title: 'Sukuna "Cursed King" Tee',
+          size: state.currentSize,
+          wash: 'Mineral Acid Wash',
+          price: state.pricePerUnit,
+          quantity: state.quantity
+        });
+      }
+
+      updateCartBadge();
+      renderCartDrawer();
+      showToast(`Added ${state.quantity}x (Size ${state.currentSize}) to cart!`);
+    }
+
+    function updateCartBadge() {
+      const count = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCountBadge.textContent = count;
+    }
+
+    function toggleCartDrawer() {
+      cartDrawer.classList.toggle('translate-x-full');
+      renderCartDrawer();
+    }
+
+    function renderCartDrawer() {
+      const container = document.getElementById('cartItemsList');
+      const subtotalEl = document.getElementById('cartDrawerSubtotal');
+
+      if (state.cart.length === 0) {
+        container.innerHTML = `
+          <div class="h-64 flex flex-col items-center justify-center text-center text-zinc-500 space-y-3">
+            <i class="ph ph-shopping-cart-simple text-4xl text-zinc-700"></i>
+            <p class="text-sm">Your cart is currently empty.</p>
+          </div>
+        `;
+        subtotalEl.textContent = '$0.00';
+        return;
+      }
+
+      let subtotal = 0;
+      container.innerHTML = state.cart.map((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        return `
+          <div class="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800/80 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center font-bold text-red-500 text-xs">
+                ${item.size}
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white">${item.title}</h4>
+                <p class="text-[11px] text-zinc-400">Size: ${item.size} · Qty: ${item.quantity}</p>
+                <p class="text-xs font-bold text-red-400 mt-0.5">$${itemTotal.toFixed(2)}</p>
+              </div>
+            </div>
+            <button onclick="removeCartItem(${index})" class="text-zinc-500 hover:text-red-400 p-1.5 transition">
+              <i class="ph-bold ph-trash text-lg"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    function removeCartItem(index) {
+      state.cart.splice(index, 1);
+      updateCartBadge();
+      renderCartDrawer();
+      showToast('Item removed from cart');
+    }
+
+    function instantBuy() {
+      addToCart();
+      toggleCartDrawer();
+    }
+
+    function triggerCheckout() {
+      if (state.cart.length === 0) {
+        showToast('Cart is empty!');
+        return;
+      }
+      showToast('Proceeding to encrypted checkout...');
+    }
+
+    function openSizeGuide() {
+      const modal = document.getElementById('sizeGuideModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSizeGuide() {
+      const modal = document.getElementById('sizeGuideModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleLike() {
+      state.isLiked = !state.isLiked;
+      const icon = document.getElementById('likeIcon');
+      if (state.isLiked) {
+        icon.className = 'ph-fill ph-heart text-red-500 text-xl';
+        showToast('Saved to your wishlist');
+      } else {
+        icon.className = 'ph ph-heart text-zinc-300 text-xl';
+        showToast('Removed from wishlist');
+      }
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      toastText.textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2500);
+    }
+
+    // Close size guide with Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSizeGuide();
+      }
+    });
+  </script>
+</body>
+</html>
